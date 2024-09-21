@@ -2,13 +2,20 @@
   description = "nixos-hardware";
 
   outputs = _: {
-    nixosModules = {
+    nixosModules = let
+      deprecated = issue: name: value:
+        builtins.trace "warning: ${name} flake output is deprecated and will be removed. See https://github.com/NixOS/nixos-hardware/issues/${issue} for more information" value;
+      import = path: path; # let the module system know what we are exporting
+    in {
       acer-aspire-4810t = import ./acer/aspire/4810t;
       airis-n990 = import ./airis/n990;
+      apple-imac-14-2 = import ./apple/imac/14-2;
+      apple-imac-18-2 = import ./apple/imac/18-2;
       apple-macbook-air-3 = import ./apple/macbook-air/3;
       apple-macbook-air-4 = import ./apple/macbook-air/4;
       apple-macbook-air-6 = import ./apple/macbook-air/6;
       apple-macbook-pro = import ./apple/macbook-pro;
+      apple-macbook-pro-8-1 = import ./apple/macbook-pro/8-1;
       apple-macbook-pro-10-1 = import ./apple/macbook-pro/10-1;
       apple-macbook-pro-11-5 = import ./apple/macbook-pro/11-5;
       apple-macbook-pro-12-1 = import ./apple/macbook-pro/12-1;
@@ -23,14 +30,19 @@
       asus-fa507rm = import ./asus/fa507rm;
       asus-pro-ws-x570-ace = import ./asus/pro-ws-x570-ace;
       asus-rog-strix-g513im = import ./asus/rog-strix/g513im;
+      asus-rog-strix-g713ie = import ./asus/rog-strix/g713ie;
       asus-rog-strix-g733qs = import ./asus/rog-strix/g733qs;
+      asus-rog-strix-x570e = import ./asus/rog-strix/x570e;
       asus-zenbook-ux371 = import ./asus/zenbook/ux371;
       asus-zephyrus-ga401 = import ./asus/zephyrus/ga401;
       asus-zephyrus-ga402 = import ./asus/zephyrus/ga402;
       asus-zephyrus-ga402x = import ./asus/zephyrus/ga402x;
+      asus-zephyrus-ga402x-amdgpu = import ./asus/zephyrus/ga402x/amdgpu;
+      asus-zephyrus-ga402x-nvidia = import ./asus/zephyrus/ga402x/nvidia;
       asus-zephyrus-ga502 = import ./asus/zephyrus/ga502;
       asus-zephyrus-ga503 = import ./asus/zephyrus/ga503;
       asus-zephyrus-gu603h = import ./asus/zephyrus/gu603h;
+      asus-zephyrus-gu605my = import ./asus/zephyrus/gu605my;
       beagleboard-pocketbeagle = import ./beagleboard/pocketbeagle;
       chuwi-minibook-x = import ./chuwi/minibook-x;
       deciso-dec = import ./deciso/dec;
@@ -48,6 +60,7 @@
       dell-latitude-7430 = import ./dell/latitude/7430;
       dell-latitude-7490 = import ./dell/latitude/7490;
       dell-latitude-9430 = import ./dell/latitude/9430;
+      dell-optiplex-3050 = import ./dell/optiplex/3050;
       dell-poweredge-r7515 = import ./dell/poweredge/r7515;
       dell-precision-3541 = import ./dell/precision/3541;
       dell-precision-5530 = import ./dell/precision/5530;
@@ -97,6 +110,7 @@
       gpd-pocket-3 = import ./gpd/pocket-3;
       gpd-win-2 = import ./gpd/win-2;
       gpd-win-max-2-2023 = import ./gpd/win-max-2/2023;
+      gpd-win-mini-2024 = import ./gpd/win-mini/2024;
       hp-elitebook-2560p = import ./hp/elitebook/2560p;
       hp-elitebook-830g6 = import ./hp/elitebook/830/g6;
       hp-elitebook-845g7 = import ./hp/elitebook/845/g7;
@@ -107,6 +121,7 @@
       intel-nuc-8i7beh = import ./intel/nuc/8i7beh;
       lenovo-ideapad-15alc6 = import ./lenovo/ideapad/15alc6;
       lenovo-ideapad-15arh05 = import ./lenovo/ideapad/15arh05;
+      lenovo-ideapad-15ach6 = import ./lenovo/ideapad/15ach6;
       lenovo-ideapad-16ach6 = import ./lenovo/ideapad/16ach6;
       lenovo-ideapad-z510 = import ./lenovo/ideapad/z510;
       lenovo-ideapad-slim-5 = import ./lenovo/ideapad/slim-5;
@@ -142,6 +157,7 @@
       lenovo-thinkpad-p14s-amd-gen2 = import ./lenovo/thinkpad/p14s/amd/gen2;
       lenovo-thinkpad-p14s-amd-gen3 = import ./lenovo/thinkpad/p14s/amd/gen3;
       lenovo-thinkpad-p14s-amd-gen4 = import ./lenovo/thinkpad/p14s/amd/gen4;
+      lenovo-thinkpad-p14s-intel-gen3 = import ./lenovo/thinkpad/p14s/intel/gen3;
       lenovo-thinkpad-p16s-amd-gen1 = import ./lenovo/thinkpad/p16s/amd/gen1;
       lenovo-thinkpad-p50 = import ./lenovo/thinkpad/p50;
       lenovo-thinkpad-p51 = import ./lenovo/thinkpad/p51;
@@ -152,8 +168,10 @@
       lenovo-thinkpad-t14-amd-gen2 = import ./lenovo/thinkpad/t14/amd/gen2;
       lenovo-thinkpad-t14-amd-gen3 = import ./lenovo/thinkpad/t14/amd/gen3;
       lenovo-thinkpad-t14-amd-gen4 = import ./lenovo/thinkpad/t14/amd/gen4;
+      lenovo-thinkpad-t14-amd-gen5 = import ./lenovo/thinkpad/t14/amd/gen5;
       lenovo-thinkpad-t14s = import ./lenovo/thinkpad/t14s;
       lenovo-thinkpad-t14s-amd-gen1 = import ./lenovo/thinkpad/t14s/amd/gen1;
+      lenovo-thinkpad-t14s-amd-gen4 = import ./lenovo/thinkpad/t14s/amd/gen4;
       lenovo-thinkpad-t410 = import ./lenovo/thinkpad/t410;
       lenovo-thinkpad-t420 = import ./lenovo/thinkpad/t420;
       lenovo-thinkpad-t430 = import ./lenovo/thinkpad/t430;
@@ -180,6 +198,7 @@
       lenovo-thinkpad-x1-9th-gen = import ./lenovo/thinkpad/x1/9th-gen;
       lenovo-thinkpad-x1-10th-gen = import ./lenovo/thinkpad/x1/10th-gen;
       lenovo-thinkpad-x1-11th-gen = import ./lenovo/thinkpad/x1/11th-gen;
+      lenovo-thinkpad-x1-12th-gen = import ./lenovo/thinkpad/x1/12th-gen;
       lenovo-thinkpad-x1-extreme = import ./lenovo/thinkpad/x1-extreme;
       lenovo-thinkpad-x1-extreme-gen2 = import ./lenovo/thinkpad/x1-extreme/gen2;
       lenovo-thinkpad-x1-extreme-gen4 = import ./lenovo/thinkpad/x1-extreme/gen4;
@@ -203,8 +222,11 @@
       lenovo-thinkpad-z13-gen2 = import ./lenovo/thinkpad/z/gen2/z13;
       lenovo-yoga-6-13ALC6 = import ./lenovo/yoga/6/13ALC6;
       lenovo-yoga-7-14ARH7 = import ./lenovo/yoga/7/14ARH7;
+      lenovo-yoga-7-14ARH7-amdgpu = import ./lenovo/yoga/7/14ARH7/amdgpu;
+      lenovo-yoga-7-14ARH7-nvidia = import ./lenovo/yoga/7/14ARH7/nvidia;
       lenovo-yoga-7-slim-gen8 = import ./lenovo/yoga/7/slim/gen8;
       letsnote-cf-lx4 = import ./panasonic/letsnote/cf-lx4;
+      malibal-aon-s1-intel = import ./malibal/aon/s1;
       microchip-icicle-kit = import ./microchip/icicle-kit;
       microsoft-surface-go = import ./microsoft/surface/surface-go;
       microsoft-surface-pro-intel = import ./microsoft/surface/surface-pro-intel;
@@ -218,6 +240,7 @@
       msi-b550-a-pro = import ./msi/b550-a-pro;
       msi-gs60 = import ./msi/gs60;
       msi-gl62 = import ./msi/gl62;
+      msi-gl65-10SDR-492 = import ./msi/gl65/10SDR-492;
       nxp-imx8mp-evk = import ./nxp/imx8mp-evk;
       nxp-imx8mq-evk = import ./nxp/imx8mq-evk;
       nxp-imx8qm-mek = import ./nxp/imx8qm-mek;
@@ -226,6 +249,7 @@
       omen-14-fb0798ng = import ./omen/14-fb0798ng;
       omen-15-en0010ca = import ./omen/15-en0010ca;
       omen-16-n0005ne = import ./omen/16-n0005ne;
+      omen-16-n0280nd = import ./omen/16-n0280nd;
       omen-15-en1007sa = import ./omen/15-en1007sa;
       omen-15-en0002np = import ./omen/15-en0002np;
       onenetbook-4 = import ./onenetbook/4;
@@ -239,18 +263,21 @@
       purism-librem-15v3 = import ./purism/librem/15v3;
       purism-librem-5r4 = import ./purism/librem/5r4;
       raspberry-pi-2 = import ./raspberry-pi/2;
+      raspberry-pi-3 = import ./raspberry-pi/3;
       raspberry-pi-4 = import ./raspberry-pi/4;
       raspberry-pi-5 = import ./raspberry-pi/5;
       kobol-helios4 = import ./kobol/helios4;
       samsung-np900x3c = import ./samsung/np900x3c;
       starfive-visionfive-v1 = import ./starfive/visionfive/v1;
       starfive-visionfive-2 = import ./starfive/visionfive/v2;
+      starlabs-starlite-i5 = import ./starlabs/starlite/i5;
       supermicro = import ./supermicro;
       supermicro-a1sri-2758f = import ./supermicro/a1sri-2758f;
       supermicro-m11sdv-8c-ln4f = import ./supermicro/m11sdv-8c-ln4f;
       supermicro-x10sll-f = import ./supermicro/x10sll-f;
       supermicro-x12scz-tln4f = import ./supermicro/x12scz-tln4f;
       system76 = import ./system76;
+      system76-gaze18 = import ./system76/gaze18;
       system76-darp6 = import ./system76/darp6;
       toshiba-swanky = import ./toshiba/swanky;
       tuxedo-infinitybook-v4 = import ./tuxedo/infinitybook/v4;
@@ -263,10 +290,16 @@
       common-cpu-amd-zenpower = import ./common/cpu/amd/zenpower.nix;
       common-cpu-amd-raphael-igpu = import ./common/cpu/amd/raphael/igpu.nix;
       common-cpu-intel = import ./common/cpu/intel;
-      common-cpu-intel-comet-lake = import ./common/cpu/intel/comet-lake;
+      common-gpu-intel-comet-lake =
+        deprecated "992" "common-gpu-intel-comet-lake"
+        (import ./common/gpu/intel/comet-lake);
       common-cpu-intel-cpu-only = import ./common/cpu/intel/cpu-only.nix;
-      common-cpu-intel-kaby-lake = import ./common/cpu/intel/kaby-lake;
-      common-cpu-intel-sandy-bridge = import ./common/cpu/intel/sandy-bridge;
+      common-gpu-intel-kaby-lake =
+        deprecated "992" "common-gpu-intel-kaby-lake"
+        (import ./common/gpu/intel/kaby-lake);
+      common-gpu-intel-sandy-bridge =
+        deprecated "992" "common-gpu-intel-sandy-bridge"
+        (import ./common/gpu/intel/sandy-bridge);
       common-gpu-amd = import ./common/gpu/amd;
       common-gpu-amd-sea-islands = import ./common/gpu/amd/sea-islands;
       common-gpu-amd-southern-islands = import ./common/gpu/amd/southern-islands;

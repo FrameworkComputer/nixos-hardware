@@ -12,6 +12,8 @@ in {
     ## "prime.nix" loads this, aleady:
     # ../../../common/gpu/nvidia
     ../../../../common/gpu/nvidia/prime.nix
+    ../../../../common/gpu/nvidia/ada-lovelace
+
   ];
 
   # NVIDIA GeForce RTX 4060 Mobile
@@ -25,12 +27,7 @@ in {
 
   hardware = {
     ## Enable the Nvidia card, as well as Prime and Offload:
-    amdgpu.loadInInitrd = true;
-    opengl.extraPackages = with pkgs; [
-      # Also in nvidia/default.nix
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
+    amdgpu.initrd.enable = lib.mkDefault true;
 
     nvidia = {
       modesetting.enable = true;
