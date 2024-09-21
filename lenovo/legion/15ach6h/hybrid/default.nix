@@ -6,6 +6,7 @@
     ../../../../common/cpu/amd/pstate.nix
     ../../../../common/gpu/amd
     ../../../../common/gpu/nvidia/prime.nix
+    ../../../../common/gpu/nvidia/ampere
     ../../../../common/pc/laptop
     ../../../../common/pc/laptop/ssd
   ];
@@ -20,7 +21,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware = {
-    amdgpu.loadInInitrd = lib.mkDefault false;
+    amdgpu.initrd.enable = false;
 
     nvidia = {
       modesetting.enable = lib.mkDefault true;

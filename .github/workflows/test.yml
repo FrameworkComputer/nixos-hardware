@@ -9,9 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: cachix/install-nix-action@V27
-      with:
-        nix_path: nixpkgs=channel:nixos-unstable
-    - name: Show nixpkgs version
-      run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
-    - run: ./tests/run.py
+    - uses: cachix/install-nix-action@V28
+    - run: nix run ./tests#run .

@@ -1,8 +1,8 @@
-{ lib, pkgs, ... }:
+{ lib, ... }:
 
 {
+  imports = [ ../24.05-compat.nix ];
   services.xserver.videoDrivers = lib.mkDefault [ "nvidia" ];
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiVdpau
-  ];
+  # TODO: this will be a default after https://github.com/NixOS/nixpkgs/pull/326369
+  hardware.nvidia.modesetting.enable = lib.mkDefault true;
 }

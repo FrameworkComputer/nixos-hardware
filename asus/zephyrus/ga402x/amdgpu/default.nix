@@ -1,11 +1,10 @@
 { config,
   lib,
-  pkgs,
   ...
 }:
 
 let
-  inherit (lib) mkDefault mkEnableOption mkIf mkMerge;
+  inherit (lib) mkEnableOption mkIf mkMerge;
   cfg = config.hardware.asus.zephyrus.ga402x;
 
 in {
@@ -20,19 +19,6 @@ in {
   };
 
   config = mkMerge [
-    {
-      # AMD RX680
-      services.xserver.videoDrivers = mkDefault [ "amdgpu" ];
-
-      hardware = {
-        amdgpu.loadInInitrd = true;
-        opengl.extraPackages = with pkgs; [
-          vaapiVdpau
-          libvdpau-va-gl
-        ];
-      };
-    }
-
     (mkIf cfg.amdgpu.recovery.enable {
       # Hopefully fixes for where the kernel sometimes hangs when suspending or hibernating
       #  (Though, I'm very suspicious of the Mediatek Wifi...)
