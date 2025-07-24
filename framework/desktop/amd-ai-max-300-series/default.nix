@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../../common/cpu/amd
@@ -7,4 +12,7 @@
     ../../../common/pc/ssd
     ../../framework-tool.nix
   ];
+
+  # 6.14 and above have good GPU support
+  boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.14") pkgs.linuxPackages_latest;
 }
