@@ -11,6 +11,11 @@
     ../common/intel.nix
   ];
 
+  # Fixes mic clipping when set over 50% input volume
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel model=limit-mic-boost
+  '';
+
   # Everything is updateable through fwupd
   services.fwupd.enable = true;
 
